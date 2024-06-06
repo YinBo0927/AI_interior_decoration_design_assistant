@@ -2,7 +2,7 @@ import dashscope
 dashscope.api_key="sk-2d05db839dc94bbea634c77e2041ed1c"
 import random
 from http import HTTPStatus
-from dashscope import Generation  # 建议dashscope SDK 的版本 >= 1.14.0
+from dashscope import Generation  
 
 
 def call_with_messages():
