@@ -13,7 +13,7 @@ def call_with_stream(user_input):
 
                                     User: {user_input}
                                     AIstinct:
-                    When the user do not mention a renovation request, you need to reply to user ordinary questions.'''
+                                    '''
     messages = [
         {'role': 'user', 'content': prompt}]
     responses = Generation.call("qwen-turbo",
