@@ -33,11 +33,11 @@ def multi_round():
             break
         
         # 根据用户输入更新状态变量
-        #if "I" in user_input.upper() or "who" in user_input.lower():
-        #   include_history = True
-        #else:
-        #    include_history = False
-        include_history = 'I' in user_input
+        if "I" in user_input.upper() or "who" in user_input.lower() or "hello" in user_input.lower():
+           include_history = True
+        else:
+            include_history = False
+        #include_history = 'I' in user_input
 
         # 将当前用户输入添加到消息历史中
         messages.append({'role': 'user', 'content': user_input})
