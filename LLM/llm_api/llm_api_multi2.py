@@ -46,7 +46,7 @@ def multi_round():
         messages_to_send = messages if include_history else [{'role': 'user', 'content': user_input}]
 
         # 调用生成模型
-        response = Generation.call(model="qwen-turbo",
+        response = Generation.call(model="qwen-max",
                                    messages=messages_to_send,
                                    result_format='message',  
                                    stream=False, 
@@ -56,7 +56,7 @@ def multi_round():
         # 检查响应并打印助手的回复
         if response.status_code == HTTPStatus.OK:
             assistant_reply = response['output']['choices'][0]['message']['content']
-            print(f"Assistant: {assistant_reply}")
+            print(f"AIstinct: {assistant_reply}")
         else:
             print(f"Error: Request id: {response.request_id}, Status code: {response.status_code}, Error message: {response.message}")
 
