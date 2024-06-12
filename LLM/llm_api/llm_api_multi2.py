@@ -2,7 +2,7 @@ import dashscope
 from http import HTTPStatus
 from dashscope import Generation
 
-def multi_round():
+def multi_round(user_input):
     dashscope.api_key = "sk-2d05db839dc94bbea634c77e2041ed1c"
     prompt = f'''Your name is AIstinct, if the user mentions a decoration request or some modifications of previous decoration requests in the current user_input, you need to simplify and summarize it into a short description suitable for generating an image. The description should be one sentence long. Do not include any extra information or context. 
                                  Example:
@@ -28,7 +28,7 @@ def multi_round():
     include_history = False
 
     while True:
-        user_input = input("User Input: ")
+        #user_input = input("User Input: ")
         if user_input.lower() == "exit":
             break
         
