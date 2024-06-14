@@ -4,6 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>AIstinct</title>
+    <style>
+      html, body {
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden; /* 防止水平滚动条 */
+          overflow-y: hidden; /* 防止水平滚动条 */
+      }
+  </style>
     
   </head>
   <body>
@@ -11,7 +19,7 @@
   
   <div class="w-1/4 bg-zinc-900 text-white p-4">
     <div class="flex justify-between items-center mb-4">
-      <button class="flex items-center p-2 border-2 border-zinc-800 hover:bg-zinc-800 rounded cursor-pointer">+ 新建聊天</button>
+      <button class="flex items-center p-2 border-2 border-zinc-900 hover:bg-zinc-800 rounded cursor-pointer">+ 新建聊天 </button>
     </div>
     <div class="mb-4">
       <div class="flex items-center justify-between p-2 bg-zinc-800 rounded">
@@ -38,80 +46,94 @@
     </ul>
   </div>
   
-  <div class="flex-1 flex flex-col bg-zinc-800 text-white">
+  <div class="flex-1 flex flex-col bg-zinc-100 text-black">
     
-    <div class="flex items-center justify-between p-4 bg-zinc-900">
+    <div class="flex items-center justify-between p-4 bg-zinc-50">
       <span>AIstinct - Your Interior Design Assistant</span>
       <div class="flex items-center space-x-2">
-        <button class="flex items-center p-2 border-2 border-zinc-800 hover:bg-zinc-800 rounded cursor-pointer">⚙️</button>
+        <button class="flex items-center p-2 border-2 border-zinc-50 hover:bg-zinc-400 rounded cursor-pointer">⚙️</button>
       </div>
     </div>
 
 <div id="chat-container" class="flex-1 overflow-y-auto p-4 space-y-4">
   <div class="flex items-start space-x-2">
-    <div class="bg-zinc-700 p-4 rounded w-full">
+    <div class="bg-zinc-300 p-4 rounded w-full">
       <div class="flex items-center space-x-2 mb-2">
         <img src="./profile/logo24.png" alt="bot" class="rounded-full">
         <span>AInstinct</span>
       </div>
       <div class="flex items-center space-x-2 mb-2">
-        <span>这是对话的开头,ai发言...</span>
-      </div>
-    </div>
-  </div>
-  <div class="flex items-start space-x-2">
-    <div class="bg-zinc-700 p-4 rounded w-full">
-      <div class="flex items-center space-x-2 mb-2">
-        <img src="./profile/user24.png" alt="user" class="rounded-full">
-        <span>User</span>
+        <span>Hi, I'm your AI interior design assistant AIstinct. What can I do for you?</span>
       </div>
       <div class="flex items-center space-x-2 mb-2">
-        <span>还是一句占位对话,用户发言</span>
+        <img src="show.png" alt="bot" style="max-width: 720px; max-height: 360px;">
       </div>
-    </div>
-  </div>
-  <div class="flex items-start space-x-2">
-    <div class="bg-zinc-700 p-4 rounded w-full">
-      <div class="flex items-center space-x-2 mb-2">
-        <img src="./profile/logo24.png" alt="bot" class="rounded-full">
-        <span>AInstinct</span>
-      </div>
-      <div class="flex items-center space-x-2 mb-2">
-        <img src="1.png" alt="bot">
-      </div>
-      <div class="flex items-center space-x-2 mb-2">
-        <span>好的，让我们开始...</span>
-      </div>
-      <p>...</p>
     </div>
   </div>
 </div>
 
 
-<div class="p-4 bg-zinc-900 flex items-center space-x-2">
-  <input id="user-input" type="text" placeholder="输入一条消息或键入 '/' 以选择提示..." class="flex-1 p-2 rounded bg-zinc-700 text-white">
-  <button id="api-button" class="flex items-center p-2 border-2 border-zinc-800 hover:bg-zinc-800 rounded cursor-pointer"><svg t="1717915515617" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5332" width="24" height="24"><path d="M959.667298 800.651143l-33.843806-157.556409c-0.064468-0.224104 0-0.388856-0.029676-0.587378l-2.611477-10.637268c-1.434675-5.9055-5.15644-10.539031-9.918907-13.248745-4.767584-2.804882-10.638291-3.686972-16.416901-1.956561l-10.538007 3.067872c-0.164752 0.029676-0.328481 0.163729-0.557702 0.25992L729.110271 669.726278c-11.618619 3.362584-18.664082 15.634072-15.829524 27.412326l2.64627 8.879228c2.838651 11.743462 17.358343 15.370059 28.976962 12.006452l100.167351-32.18912c-2.316765 4.496407-4.728698 8.943696-7.227612 13.325493-50.845015 89.318258-137.646963 153.181775-238.125399 175.209464-94.868671 20.790512-225.597061 3.428076-307.410392-48.981574-81.779561-52.344159-137.517003-136.410809-158.308539-231.274364-3.551896-16.152888-19.510356-26.4013-35.668361-22.844288-16.152888 3.527336-26.400277 19.515473-22.809495 35.669384 24.178679 110.532419 89.252767 207.876468 184.510294 268.90031 95.257527 60.993143 242.041592 81.256652 352.540242 57.046251 116.955712-25.683962 218.022549-100.089579 277.32212-204.126051 0.652869-1.154289 1.288343-2.320858 1.932002-3.479241l18.071587 85.813434c2.870374 11.782348 14.618952 18.568914 26.237571 15.140839l8.384971-0.876973C956.17373 821.927725 962.502879 812.369022 959.667298 800.651143L959.667298 800.651143zM96.961844 395.962194l2.610454 10.654664c1.439792 5.90857 5.15644 10.525728 9.924024 13.252839 4.76349 2.787486 10.637268 3.669576 16.412808 1.957585l10.507308-3.086291c0.199545-0.029676 0.358157-0.177032 0.557702-0.2415l156.64055-49.751101c11.618619-3.393283 18.697851-15.634072 15.859199-27.41335l-2.871397-7.978718c-2.870374-11.747555-17.134239-16.300244-28.717042-12.906961l-100.582813 32.301683c5.130857-11.68411 10.870582-23.094998 17.173125-34.111912 50.90539-89.366354 136.895857-150.277632 237.309824-172.304298 94.863555-20.790512 225.595015-3.41068 307.374576 48.997947 81.814354 52.361555 138.299833 133.48927 159.121044 228.386594 3.558036 16.153912 19.48068 26.350135 35.668361 22.810518 11.294231-2.482541 19.709901-11.048637 22.485107-21.50478 1.206478-4.473895 1.404999-9.30083 0.323365-14.164604-24.213471-110.51093-90.030479-204.973348-185.288007-265.961374-95.291297-61.011562-242.045685-81.261769-352.543312-57.029878-116.891244 25.618471-217.210044 97.05036-276.470729 201.085808-4.179183 7.325849-8.151657 14.809287-11.908214 22.416546l-17.690918-84.010369c-2.905166-11.765975-13.900591-21.262256-25.51921-17.868973l-8.385994 0.916882c-11.618619 3.429099-18.697851 15.69547-15.859199 27.412326l33.805944 157.552316C96.996636 395.58664 96.896352 395.767765 96.961844 395.962194L96.961844 395.962194zM96.961844 395.962194" fill="#ffffff" p-id="5333"></path></svg> </button>
-  <button id="send-button" class="flex items-center p-2 border-2 border-zinc-800 hover:bg-zinc-800 rounded cursor-pointer"><svg t="1717915246671" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4255" data-spm-anchor-id="a313x.search_index.0.i0.f9d53a81HLqTSk" width="24" height="24"><path d="M0 1024l106.496-474.112 588.8-36.864-588.8-39.936L0 0l1024 512z" fill="#ffffff" p-id="4256" data-spm-anchor-id="a313x.search_index.0.i1.f9d53a81HLqTSk" class="selected"></path></svg></button>
+<div class="p-4 bg-zinc-50 flex items-center space-x-2">
+  <input id="user-input" type="text" placeholder="输入一条消息或键入 '/' 以选择提示..." class="flex-1 p-2 rounded bg-zinc-200 text-black">
+  <div id="preview" class="rounded-full", input_img_path=""></div>
+  <button id="upload-button" class="flex items-center p-2 border-2 border-zinc-50 hover:bg-zinc-400 rounded cursor-pointer">
+    <svg t="1718270141831" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3173" width="24" height="24">
+      <path d="M804.571429 749.714286v54.857143a18.285714 18.285714 0 0 1-18.285715 18.285714H237.714286a18.285714 18.285714 0 0 1-18.285715-18.285714v-54.857143a73.142857 73.142857 0 0 0-73.142857-73.142857H73.142857a73.142857 73.142857 0 0 0-73.142857 73.142857v164.571428a109.714286 109.714286 0 0 0 109.714286 109.714286h804.571428a109.714286 109.714286 0 0 0 109.714286-109.714286v-164.571428a73.142857 73.142857 0 0 0-73.142857-73.142857h-73.142857a73.142857 73.142857 0 0 0-73.142857 73.142857z" fill="#2c2c2c" p-id="3174"></path>
+      <path d="M640 364.068571v280.32a73.142857 73.142857 0 0 1-73.142857 73.142858h-109.714286a73.142857 73.142857 0 0 1-73.142857-73.142858V364.068571a18.285714 18.285714 0 0 0-18.285714-18.285714h-85.577143a36.571429 36.571429 0 0 1-27.794286-60.16L484.205714 12.8a36.571429 36.571429 0 0 1 54.857143 0L771.657143 285.622857a36.571429 36.571429 0 0 1-27.794286 60.16H658.285714a18.285714 18.285714 0 0 0-18.285714 18.285714z" fill="#2c2c2c" p-id="3175"></path>
+    </svg>
+  </button>
+  <input type="file" id="file-input" class="hidden" accept="image/*">
+  <button id="send-button" class="flex items-center p-2 border-2 border-zinc-50 hover:bg-zinc-400 rounded cursor-pointer">
+    <svg t="1718269898941" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1471" width="24" height="24">
+      <path d="M998.976 554.3232C1031.232 539.6032 1031.328 515.7952 998.976 501.0432L122.88 101.3312C90.624 86.6112 64.448 103.5072 64.384 138.4832L64 426.9952 773.568 527.6672 64 628.3392 64.384 916.8832C64.448 952.1152 90.528 968.7872 122.88 954.0352L998.976 554.3232Z" p-id="1472" fill="#2c2c2c">        
+      </path>
+    </svg>
+  </button>
+  
 </div>
   </div>
 </div>
 <script>
+  //输入与回复
   document.getElementById('send-button').addEventListener('click', function() {
       // 获取用户输入
       var userInput = document.getElementById('user-input').value;
+      var input_img_path = document.getElementById('preview').input_img_path;
 
       // 创建新的聊天气泡
       var chatBubble = document.createElement('div');
       chatBubble.className = 'flex items-start space-x-2';
 
-      var bubbleContent = `
-          <div class="bg-zinc-700 p-4 rounded w-full">
-              <div class="flex items-center space-x-2 mb-2">
-                  <img src="https://placehold.co/24x24" alt="user" class="rounded-full">
+      if(input_img_path=="" ||input_img_path==null ||input_img_path==undefined){
+        var bubbleContent = `
+          <div class="bg-zinc-300 p-4 rounded w-full">
+              <div class="flex items-center justify-end space-x-2 mb-2">
+                <span>User</span>
+                 <img src="./profile/user24.png" alt="user" class="rounded-full">
+              </div>
+              <div class="flex items-center justify-end space-x-2 mb-2">
                   <span>${userInput}</span>
               </div>
           </div>
       `;
+      }
+      else{
+        var bubbleContent = `
+          <div class="bg-zinc-300 p-4 rounded w-full">
+              <div class="flex items-center justify-end space-x-2 mb-2">
+                <span>User</span>
+                 <img src="./profile/user24.png" alt="user" class="rounded-full">
+              </div>
+              <div class="flex items-center justify-end space-x-2 mb-2">
+                  <span>${userInput}</span>
+              </div>
+              <div class="flex items-center space-x-2 mb-2">
+                  <img src=${input_img_path} alt="user" style="max-width: 720px; max-height: 360px;">
+              </div>
+          </div>
+      `;
+      }
+      
       chatBubble.innerHTML = bubbleContent;
 
       // 将新的聊天气泡添加到聊天框
@@ -119,22 +141,26 @@
 
       // 清空输入框
       document.getElementById('user-input').value = '';
-  });
-</script>
-<script>
-  document.getElementById('api-button').addEventListener('click', function() {
-      var requestData = {
-          "override_settings": {
-              "sd_model_checkpoint": "xsarchitectural_v11.ckpt [631eea1a0e]",
-          },
-          "prompt": "<lora:FT_lora:1>, a kitchen with a stove, sink, and a window in its center area with a view of the city, Cui Bai, finely detailed features, a digital rendering, modern european ink painting, Kitchen",
-          "negative_prompt": "text, word, cropped, low quality, normal quality, username, watermark, signature, blurry, soft, soft line, curved line, sketch, ugly, logo, pixelated, lowres, nsfw",
-          "steps": 30,
-          "seed": -1,
-          "width": 720,
-          "height": 480,
-      };
 
+      //清空预览区
+      document.getElementById('preview').innerHTML = '';
+      document.getElementById('preview').input_img_path = ''; //清空路径
+      document.getElementById('file-input').value = ''; // 重置 input 的值
+      document.getElementById('upload-button').innerHTML = `<svg t="1718270141831" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3173" width="24" height="24">
+      <path d="M804.571429 749.714286v54.857143a18.285714 18.285714 0 0 1-18.285715 18.285714H237.714286a18.285714 18.285714 0 0 1-18.285715-18.285714v-54.857143a73.142857 73.142857 0 0 0-73.142857-73.142857H73.142857a73.142857 73.142857 0 0 0-73.142857 73.142857v164.571428a109.714286 109.714286 0 0 0 109.714286 109.714286h804.571428a109.714286 109.714286 0 0 0 109.714286-109.714286v-164.571428a73.142857 73.142857 0 0 0-73.142857-73.142857h-73.142857a73.142857 73.142857 0 0 0-73.142857 73.142857z" fill="#2c2c2c" p-id="3174"></path>
+      <path d="M640 364.068571v280.32a73.142857 73.142857 0 0 1-73.142857 73.142858h-109.714286a73.142857 73.142857 0 0 1-73.142857-73.142858V364.068571a18.285714 18.285714 0 0 0-18.285714-18.285714h-85.577143a36.571429 36.571429 0 0 1-27.794286-60.16L484.205714 12.8a36.571429 36.571429 0 0 1 54.857143 0L771.657143 285.622857a36.571429 36.571429 0 0 1-27.794286 60.16H658.285714a18.285714 18.285714 0 0 0-18.285714 18.285714z" fill="#2c2c2c" p-id="3175"></path>
+      </svg>` //重置上传图标 
+
+
+      // 滚动到新内容处
+      chatBubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+      //api
+      var requestData = {
+          "user_input":userInput,
+          "input_img_path":input_img_path
+      };
+      
       fetch('/call_python_function', {
           method: 'POST',
           headers: {
@@ -145,25 +171,39 @@
       .then(response => response.json())
       .then(data => {
           // 确保data.result存在
-          if (data.result) {
+          if (data.reply) {
               var chatBubble = document.createElement('div');
               chatBubble.className = 'flex items-start space-x-2';
-
-              var bubbleContent = `
-                  <div class="bg-zinc-700 p-4 rounded w-full">
+              // 确保img_path存在
+              if(data.img_path){
+                var bubbleContent = `
+                    <div class="bg-zinc-300 p-4 rounded w-full">
+                        <div class="flex items-center space-x-2 mb-2">
+                          <img src="./profile/logo24.png" alt="Aistinct" class="rounded-full">
+                          <span>AIstinct</span>
+                        </div>
+                        <div class="flex items-center space-x-2 mb-2">
+                          <span>${data.reply}</span>
+                        </div>
+                        <div class="flex items-center space-x-2 mb-2">
+                          <img src=${data.img_path} alt="bot">
+                        </div>
+                    </div>
+                `;
+              }
+              else{
+                var bubbleContent = `
+                  <div class="bg-zinc-300 p-4 rounded w-full">
                       <div class="flex items-center space-x-2 mb-2">
-                        <img src="./profile/logo24.png" alt="bot" class="rounded-full">
-                        <span>AInstinct</span>
+                        <img src="./profile/logo24.png" alt="Aistinct" class="rounded-full">
+                        <span>AIstinct</span>
                       </div>
                       <div class="flex items-center space-x-2 mb-2">
-                        <img id="chat-img" src="${data.result}" alt="bot">
+                        <span>${data.reply}</span>
                       </div>
-                      <div class="flex items-center space-x-2 mb-2">
-                        <span>接收成功!!!</span>
-                      </div>
-                      <p> AIstinct </p>
                   </div>
-              `;
+                `;
+              }
               chatBubble.innerHTML = bubbleContent;
 
               document.getElementById('chat-container').appendChild(chatBubble);
@@ -178,6 +218,88 @@
       .catch(error => console.error('Error:', error));
   });
 </script>
+
+<script>
+document.getElementById('upload-button').addEventListener('click', function() {
+  const preview = document.getElementById('preview');
+  const uploadButton = document.getElementById('upload-button');    
+  const file_Input = document.getElementById('file-input');
+
+  if (preview.innerHTML!='' && preview.innerHTML!=undefined && preview.innerHTML!=null){
+              preview.innerHTML = ''; // 清空预览区域
+              preview.input_img_path = ''; //清空路径
+              file_Input.value = ''; // 重置 input 的值
+              uploadButton.innerHTML = `<svg t="1718270141831" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3173" width="24" height="24">
+      <path d="M804.571429 749.714286v54.857143a18.285714 18.285714 0 0 1-18.285715 18.285714H237.714286a18.285714 18.285714 0 0 1-18.285715-18.285714v-54.857143a73.142857 73.142857 0 0 0-73.142857-73.142857H73.142857a73.142857 73.142857 0 0 0-73.142857 73.142857v164.571428a109.714286 109.714286 0 0 0 109.714286 109.714286h804.571428a109.714286 109.714286 0 0 0 109.714286-109.714286v-164.571428a73.142857 73.142857 0 0 0-73.142857-73.142857h-73.142857a73.142857 73.142857 0 0 0-73.142857 73.142857z" fill="#2c2c2c" p-id="3174"></path>
+      <path d="M640 364.068571v280.32a73.142857 73.142857 0 0 1-73.142857 73.142858h-109.714286a73.142857 73.142857 0 0 1-73.142857-73.142858V364.068571a18.285714 18.285714 0 0 0-18.285714-18.285714h-85.577143a36.571429 36.571429 0 0 1-27.794286-60.16L484.205714 12.8a36.571429 36.571429 0 0 1 54.857143 0L771.657143 285.622857a36.571429 36.571429 0 0 1-27.794286 60.16H658.285714a18.285714 18.285714 0 0 0-18.285714 18.285714z" fill="#2c2c2c" p-id="3175"></path>
+    </svg>`
+            }
+  // 获取上传的文件
+  else{
+  var fileInput = document.getElementById('file-input').click();
+  }
+});
+document.getElementById('file-input').addEventListener('change', function(event) {
+
+            //实现上传与取消的界面切换
+            // 获取按钮元素
+            const uploadButton = document.getElementById('upload-button');
+            const preview = document.getElementById('preview');
+             
+            const file = event.target.files[0];
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+
+                // 新的 SVG 图标代码
+                const newSVG = `<svg t="1718282340410" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6544" width="24" height="24"><path d="M512 45.373397c-257.710456 0-466.626603 208.916147-466.626603 466.626603s208.915124 466.626603 466.626603 466.626603 466.626603-208.915124 466.626603-466.626603S769.710456 45.373397 512 45.373397zM754.945171 664.329361c22.561855 22.561855 22.561855 59.482743 0 82.044598l-20.511149 20.511149c-22.561855 22.561855-59.482743 22.561855-82.044598 0L506.030032 620.524692 359.670639 766.884085c-22.561855 22.561855-59.482743 22.561855-82.044598 0l-20.511149-20.511149c-22.561855-22.561855-22.561855-59.482743 0-82.044598l146.359392-146.359392L245.175979 359.670639c-22.561855-22.561855-22.561855-59.482743 0-82.044598l20.511149-20.511149c22.561855-22.561855 59.482743-22.561855 82.044598 0L506.030032 415.414221l158.298306-158.298306c22.561855-22.561855 59.482743-22.561855 82.044598 0l20.511149 20.511149c22.561855 22.561855 22.561855 59.482743 0 82.044598L608.585779 517.968945 754.945171 664.329361z" fill="#2c2c2c" p-id="6545"></path></svg>`;
+                // 替换按钮内的 SVG 元素内容
+                uploadButton.innerHTML = newSVG;
+                preview.input_img_path = 'test-input.jpg';//添加图片路径
+
+                //预览缩略图
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const MAX_WIDTH = 50; // 设置最大宽度
+                        const MAX_HEIGHT = 50; // 设置最大高度
+
+                        let width = img.width;
+                        let height = img.height;
+
+                        // 按比例缩小图片
+                        if (width > height) {
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+                        } else {
+                            if (height > MAX_HEIGHT) {
+                                width *= MAX_HEIGHT / height;
+                                height = MAX_HEIGHT;
+                            }
+                        }
+
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        preview.innerHTML = ''; // 清空预览区域
+                        preview.appendChild(canvas); // 将缩小后的图片显示在预览区域
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+</script>
+
+
+
  
   </body>
 </html>
