@@ -40,7 +40,7 @@ def main():
         st.session_state.messages.clear()
         st.session_state.messages = [{"role": "assistant", "content": "How may I assist you today?"}]
         message_history_list=[]
-    st.sidebar.button('Clear Chat History', on_click=clear_chat_history(message_history_list))
+    st.sidebar.button('🗑️ Clear Chat History', on_click=clear_chat_history(message_history_list))
     st.sidebar.divider()
     st.sidebar.markdown(" **If you have any problem, feel free to contact us:**")
     st.sidebar.markdown(":email: E-mail: yb0927@outlook.com"  )
@@ -101,11 +101,11 @@ def main():
                 with st.spinner("Thinking..."):
                     response = generate_llm_output(prompt,message_history_list)
                     if "需求" in response:
-                        output = sd_module.use_sd_api(response[3:],upload_image)
-                        st.image(output)
                         placeholder = st.empty()
                         full_response = 'Here is the decoration design followed your request.'
                         placeholder.markdown(full_response)
+                        output = sd_module.use_sd_api(response[3:],upload_image)
+                        st.image(output)
                     else:
                         placeholder = st.empty()
                         full_response = ''
@@ -126,12 +126,17 @@ def main():
             with st.chat_message("assistant"):
                 with st.spinner("Thinking..."):
                     response = generate_llm_output(prompt,message_history_list)
-                    placeholder = st.empty()
-                    full_response = ''
-                    for item in response:
-                        full_response += item
+                    if "需求" in response:
+                        placeholder = st.empty()
+                        full_response = 'Please upload your rough room image first.'
                         placeholder.markdown(full_response)
-                    placeholder.markdown(full_response)
+                    else:
+                        placeholder = st.empty()
+                        full_response = ''
+                        for item in response:
+                            full_response += item
+                            placeholder.markdown(full_response)
+                        placeholder.markdown(full_response)
             message = {"role": "assistant", "content": full_response}
             st.session_state.messages.append(message)
             
