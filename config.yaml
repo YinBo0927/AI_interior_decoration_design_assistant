@@ -1,0 +1,15 @@
+cookie:
+  expiry_days: 30
+  key: some_signature_key
+  name: some_cookie_name
+credentials:
+  usernames:
+    yb:
+      email: yb0927@outlook.com
+      failed_login_attempts: 0
+      logged_in: true
+      name: Yin Bo
+      password: $2b$12$2SAmlGmb.zwsMEfaugAiVONGL87esZROWKoJYBRZY6tBzAr9NSbDW
+pre-authorized:
+  emails:
+  - melsby@gmail.com
