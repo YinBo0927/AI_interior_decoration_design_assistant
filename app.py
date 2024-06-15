@@ -64,12 +64,12 @@ with st.sidebar:
 
     st.markdown("---")
     
-    # 添加折叠按钮
-    with st.expander("参数控制"):
-        st.write("在这里调整生成参数")
-        max_length = st.slider("max_length", 0, 32768, 8192)
-        top_p = st.slider("top_p", 0.0, 1.0, 0.8)
-        temperature = st.slider("temperature", 0.0, 1.0, 0.69)
+    # # 添加折叠按钮
+    # with st.expander("参数控制"):
+    #     st.write("在这里调整生成参数")
+    #     max_length = st.slider("max_length", 0, 32768, 8192)
+    #     top_p = st.slider("top_p", 0.0, 1.0, 0.8)
+    #     temperature = st.slider("temperature", 0.0, 1.0, 0.69)
 
     # 读取历史聊天记录
     st.markdown("### 查看聊天历史")
