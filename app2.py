@@ -71,17 +71,20 @@ def main():
     message_history_list=[]
 
     # Display or clear chat messages
+    #print(len(st.session_state.messages))
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             if os.path.isfile(message["content"]):
-                st.image(message["content"],width=400)
+                #st.image(message["content"],width=400)
+                render_img_html(image_to_base64(message["content"]))
             else:
                 st.write(message["content"])
 
     def clear_chat_history(message_history_list):
-        st.session_state.messages.clear()
+        #st.session_state.messages.clear()
         st.session_state.messages = [{"role": "assistant", "content": "How may I assist you today?"}]
         message_history_list=[]
+        
     st.sidebar.button('🗑️ Clear Chat History', on_click=clear_chat_history(message_history_list))
     st.sidebar.divider()
     st.sidebar.markdown(" **If you have any problem, feel free to contact us:**")
@@ -181,7 +184,7 @@ def main():
                             # placeholder = st.empty()
                             # full_response = 'Please upload your rough room image first and I will design it for you'
                             # placeholder.markdown(full_response)
-                            print(response)
+                            # print(response)
                             placeholder = st.empty()
                             full_response = 'Here is the decoration design followed your request.'
                             placeholder.markdown(full_response)
@@ -196,7 +199,7 @@ def main():
                                 full_response += item
                                 placeholder.markdown(full_response)
                             placeholder.markdown(full_response)
-                message = {"role": "assistant", "content": full_response}
+                message = {"role": "assistant", "content": response}
                 st.session_state.messages.append(message)
             
 
