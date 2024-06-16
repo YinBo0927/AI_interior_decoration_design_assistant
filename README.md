@@ -1,2 +1,6 @@
-# AI_interior_decoration_design_assistant
-the project of the ai system design
+# This is the course project from School of Future Technology in SCUT
+
+## First stage
+```python
+pip install -r requirements.txt
+```

@@ -12,6 +12,7 @@ from streamlit_authenticator.utilities.exceptions import (CredentialsError,
 from app2 import main
 
 
+
 def main_bg(main_bg):
     main_bg_ext = "png"
     st.markdown(
@@ -26,7 +27,10 @@ def main_bg(main_bg):
         unsafe_allow_html=True
     )
 
+
+
 def login():
+    
     # main_bg('bg.jpg')
 
     # Load config file
