@@ -9,6 +9,7 @@ from PIL import Image
 import unicodedata
 import base64
 import cv2
+from img2video import img2video
 
 # 显示图片
 def render_img_html(image_b64):
@@ -31,14 +32,19 @@ def main():
     # App title
     st.title("🤖💬 AIstinct")
     st.caption("an AI assistant who can help you in interior decoration design")
+    
     # st.subheader('an AI interior decoration design assistant')
 
     # Replicate Credentials
     with st.sidebar:
-        st.title('AIstinct')
         st.markdown("""
-        <div style="text-align:left;">
-            <img src="https://s2.loli.net/2024/06/14/anpbUxW8vz1Vo42.png" class="sidebar-avatar" alt="Bot Avatar">
+        <div style="margin-top: 40px; display: flex; align-items: center;">
+            <div>
+                <img src="https://s2.loli.net/2024/06/14/anpbUxW8vz1Vo42.png" class="sidebar-avatar" alt="Bot Avatar" style="width: 50px; height: 50px; margin-right: 10px;">
+            </div>
+            <div>
+                <h1 style="margin: 0;">AIstinct</h1>
+            </div>
         </div>
         """, unsafe_allow_html=True)
     
@@ -59,6 +65,7 @@ def main():
             </style>
         """, unsafe_allow_html=True)
         st.divider()
+        model = st.selectbox(label="Please select the model", options=("AIstinct_img", "AIstinct_video"))
         upload_image = st.file_uploader("Upload Image Here", accept_multiple_files=False, type = ['jpg', 'png'])
         if upload_image:
             st.success("load image success")
@@ -138,71 +145,144 @@ def main():
         return assistant_reply
 
 
-    if upload_image:
-        if prompt := st.chat_input(placeholder="Ask me anything!(Only Support Engilsh Now)"):
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.write(prompt)
-        if st.session_state.messages[-1]["role"] != "assistant":
-            if contains_chinese(prompt):
-                st.error("Sorry, we only support English now.")
-            else:
-                with st.chat_message("assistant"):
-                    with st.spinner("Thinking..."):
-                        response = generate_llm_output(prompt,message_history_list)
-                        if "需求" in response:
-                            print(response)
-                            placeholder = st.empty()
-                            full_response = 'Here is the decoration design followed your request.'
-                            placeholder.markdown(full_response)
-                            output = sd_module.use_sd_api(response[3:],upload_image)
-                            #st.image(output,width=400)
-                            render_img_html(image_to_base64(output))
-                            response = output
-                        else:
-                            placeholder = st.empty()
-                            full_response = ''
-                            for item in response:
-                                full_response += item
-                                placeholder.markdown(full_response)
-                            placeholder.markdown(full_response)
-                message = {"role": "assistant", "content": response} #这里不确定有没有问题
-                st.session_state.messages.append(message)
-                        
-            
-    else:
-        if prompt := st.chat_input(placeholder="Ask me anything!(Only Support Engilsh Now)"):
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.write(prompt)
-        if st.session_state.messages[-1]["role"] != "assistant":
-            if contains_chinese(prompt):
+    if model == "img_decoration":
+        if upload_image:
+            if prompt := st.chat_input(placeholder="Ask me anything!(Only Support Engilsh Now)"):
+                st.session_state.messages.append({"role": "user", "content": prompt})
+                with st.chat_message("user"):
+                    st.write(prompt)
+            if st.session_state.messages[-1]["role"] != "assistant":
+                if contains_chinese(prompt):
                     st.error("Sorry, we only support English now.")
-            else:
-                with st.chat_message("assistant"):
-                    with st.spinner("Thinking..."):
-                        response = generate_llm_output(prompt,message_history_list)
-                        if "需求" in response:
-                            # placeholder = st.empty()
-                            # full_response = 'Please upload your rough room image first and I will design it for you'
-                            # placeholder.markdown(full_response)
-                            # print(response)
-                            placeholder = st.empty()
-                            full_response = 'Here is the decoration design followed your request.'
-                            placeholder.markdown(full_response)
-                            output = sd_module.use_sd_api(response[3:],upload_image)
-                            #st.image(output,width=400)
-                            render_img_html(image_to_base64(output))
-                            response = output
-                        else:
-                            placeholder = st.empty()
-                            full_response = ''
-                            for item in response:
-                                full_response += item
+                else:
+                    with st.chat_message("assistant"):
+                        with st.spinner("Thinking..."):
+                            response = generate_llm_output(prompt,message_history_list)
+                            if "需求" in response:
+                                print(response)
+                                placeholder = st.empty()
+                                full_response = 'Here is the decoration design followed your request.'
                                 placeholder.markdown(full_response)
-                            placeholder.markdown(full_response)
-                message = {"role": "assistant", "content": response}
-                st.session_state.messages.append(message)
+                                output = sd_module.use_sd_api(response[3:],upload_image)
+                                #st.image(output,width=400)
+                                render_img_html(image_to_base64(output))
+                                st.video(img2video(output),format='video/mp4')
+                                response = output
+                            else:
+                                placeholder = st.empty()
+                                full_response = ''
+                                for item in response:
+                                    full_response += item
+                                    placeholder.markdown(full_response)
+                                placeholder.markdown(full_response)
+                    message = {"role": "assistant", "content": response} #这里不确定有没有问题
+                    st.session_state.messages.append(message)
+                            
+                
+        else:
+            if prompt := st.chat_input(placeholder="Ask me anything!(Only Support Engilsh Now)"):
+                st.session_state.messages.append({"role": "user", "content": prompt})
+                with st.chat_message("user"):
+                    st.write(prompt)
+            if st.session_state.messages[-1]["role"] != "assistant":
+                if contains_chinese(prompt):
+                        st.error("Sorry, we only support English now.")
+                else:
+                    with st.chat_message("assistant"):
+                        with st.spinner("Thinking..."):
+                            response = generate_llm_output(prompt,message_history_list)
+                            if "需求" in response:
+                                # placeholder = st.empty()
+                                # full_response = 'Please upload your rough room image first and I will design it for you'
+                                # placeholder.markdown(full_response)
+                                # print(response)
+                                placeholder = st.empty()
+                                full_response = 'Here is the decoration design followed your request.'
+                                placeholder.markdown(full_response)
+                                output = sd_module.use_sd_api(response[3:],upload_image)
+                                #st.image(output,width=400)
+                                #render_img_html(image_to_base64(output))
+                                # 展示视频
+                                st.video(img2video(output),format='video/mp4',autoplay=True)
+                                response = img2video(output)
+                            else:
+                                placeholder = st.empty()
+                                full_response = ''
+                                for item in response:
+                                    full_response += item
+                                    placeholder.markdown(full_response)
+                                placeholder.markdown(full_response)
+                    message = {"role": "assistant", "content": response}
+                    st.session_state.messages.append(message)
+    else:
+        if upload_image:
+            if prompt := st.chat_input(placeholder="Ask me anything!(Only Support Engilsh Now)"):
+                st.session_state.messages.append({"role": "user", "content": prompt})
+                with st.chat_message("user"):
+                    st.write(prompt)
+            if st.session_state.messages[-1]["role"] != "assistant":
+                if contains_chinese(prompt):
+                    st.error("Sorry, we only support English now.")
+                else:
+                    with st.chat_message("assistant"):
+                        with st.spinner("Thinking..."):
+                            response = generate_llm_output(prompt,message_history_list)
+                            if "需求" in response:
+                                print(response)
+                                placeholder = st.empty()
+                                full_response = 'Here is the decoration design followed your request.'
+                                placeholder.markdown(full_response)
+                                output = sd_module.use_sd_api(response[3:],upload_image)
+                                #st.image(output,width=400)
+                                #render_img_html(image_to_base64(output))
+                                st.video(img2video(output),format='video/mp4')
+                                response = output
+                            else:
+                                placeholder = st.empty()
+                                full_response = ''
+                                for item in response:
+                                    full_response += item
+                                    placeholder.markdown(full_response)
+                                placeholder.markdown(full_response)
+                    message = {"role": "assistant", "content": response} #这里不确定有没有问题
+                    st.session_state.messages.append(message)
+                            
+                
+        else:
+            if prompt := st.chat_input(placeholder="Ask me anything!(Only Support Engilsh Now)"):
+                st.session_state.messages.append({"role": "user", "content": prompt})
+                with st.chat_message("user"):
+                    st.write(prompt)
+            if st.session_state.messages[-1]["role"] != "assistant":
+                if contains_chinese(prompt):
+                        st.error("Sorry, we only support English now.")
+                else:
+                    with st.chat_message("assistant"):
+                        with st.spinner("Thinking..."):
+                            response = generate_llm_output(prompt,message_history_list)
+                            if "需求" in response:
+                                # placeholder = st.empty()
+                                # full_response = 'Please upload your rough room image first and I will design it for you'
+                                # placeholder.markdown(full_response)
+                                # print(response)
+                                placeholder = st.empty()
+                                full_response = 'Here is the decoration design followed your request.'
+                                placeholder.markdown(full_response)
+                                output = sd_module.use_sd_api(response[3:],upload_image)
+                                #st.image(output,width=400)
+                                render_img_html(image_to_base64(output))
+                                # 展示视频
+                                st.video(img2video(output),format='video/mp4',autoplay=True)
+                                response = img2video(output)
+                            else:
+                                placeholder = st.empty()
+                                full_response = ''
+                                for item in response:
+                                    full_response += item
+                                    placeholder.markdown(full_response)
+                                placeholder.markdown(full_response)
+                    message = {"role": "assistant", "content": response}
+                    st.session_state.messages.append(message)
             
 
 if __name__ == '__main__':
