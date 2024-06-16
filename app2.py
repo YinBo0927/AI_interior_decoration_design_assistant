@@ -7,6 +7,17 @@ from dashscope import Generation
 from sd.page import sd_module
 from PIL import Image
 import unicodedata
+import base64
+import cv2
+
+def render_img_html(image_b64):
+    st.markdown(f"<img style='max-width: 700px;max-height: 500px;' src='data:image/png;base64, {image_b64}'/>", unsafe_allow_html=True)
+
+def image_to_base64(image_path):
+    image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
+    _, encoded_image = cv2.imencode(".png", image)
+    base64_image = base64.b64encode(encoded_image.tobytes()).decode("utf-8")
+    return base64_image
 
 def contains_chinese(s):
     for c in s:
@@ -114,11 +125,13 @@ def main():
                     with st.spinner("Thinking..."):
                         response = generate_llm_output(prompt,message_history_list)
                         if "需求" in response:
+                            print(response)
                             placeholder = st.empty()
                             full_response = 'Here is the decoration design followed your request.'
                             placeholder.markdown(full_response)
                             output = sd_module.use_sd_api(response[3:],upload_image)
-                            st.image(output,width=400)
+                            #st.image(output,width=400)
+                            render_img_html(image_to_base64(output))
                             response = output
                         else:
                             placeholder = st.empty()
@@ -144,9 +157,17 @@ def main():
                     with st.spinner("Thinking..."):
                         response = generate_llm_output(prompt,message_history_list)
                         if "需求" in response:
+                            # placeholder = st.empty()
+                            # full_response = 'Please upload your rough room image first and I will design it for you'
+                            # placeholder.markdown(full_response)
+                            print(response)
                             placeholder = st.empty()
-                            full_response = 'Please upload your rough room image first and I will design it for you'
+                            full_response = 'Here is the decoration design followed your request.'
                             placeholder.markdown(full_response)
+                            output = sd_module.use_sd_api(response[3:],upload_image)
+                            #st.image(output,width=400)
+                            render_img_html(image_to_base64(output))
+                            response = output
                         else:
                             placeholder = st.empty()
                             full_response = ''
