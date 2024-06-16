@@ -7,6 +7,17 @@ from dashscope import Generation
 from sd.page import sd_module
 from PIL import Image
 import unicodedata
+import base64
+import cv2
+
+def render_img_html(image_b64):
+    st.markdown(f"<img style='max-width: 800px;max-height: 1000px;' src='data:image/png;base64, {image_b64}'/>", unsafe_allow_html=True)
+
+def image_to_base64(image_path):
+    image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
+    _, encoded_image = cv2.imencode(".png", image)
+    base64_image = base64.b64encode(encoded_image.tobytes()).decode("utf-8")
+    return base64_image
 
 def contains_chinese(s):
     for c in s:
@@ -23,7 +34,28 @@ def main():
     # Replicate Credentials
     with st.sidebar:
         st.title('AIstinct')
-
+        st.markdown("""
+        <div style="text-align:left;">
+            <img src="https://s2.loli.net/2024/06/14/anpbUxW8vz1Vo42.png" class="sidebar-avatar" alt="Bot Avatar">
+        </div>
+        """, unsafe_allow_html=True)
+    
+        # 添加自定义样式
+        st.markdown("""
+            <style>
+                .bot-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 10px;
+                }
+                .sidebar-avatar {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+            </style>
+        """, unsafe_allow_html=True)
         st.divider()
         upload_image = st.file_uploader("Upload Image Here", accept_multiple_files=False, type = ['jpg', 'png'])
         if upload_image:
@@ -39,17 +71,20 @@ def main():
     message_history_list=[]
 
     # Display or clear chat messages
+    #print(len(st.session_state.messages))
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             if os.path.isfile(message["content"]):
-                st.image(message["content"],width=400)
+                #st.image(message["content"],width=400)
+                render_img_html(image_to_base64(message["content"]))
             else:
                 st.write(message["content"])
 
     def clear_chat_history(message_history_list):
-        st.session_state.messages.clear()
+        #st.session_state.messages.clear()
         st.session_state.messages = [{"role": "assistant", "content": "How may I assist you today?"}]
         message_history_list=[]
+        
     st.sidebar.button('🗑️ Clear Chat History', on_click=clear_chat_history(message_history_list))
     st.sidebar.divider()
     st.sidebar.markdown(" **If you have any problem, feel free to contact us:**")
@@ -114,11 +149,13 @@ def main():
                     with st.spinner("Thinking..."):
                         response = generate_llm_output(prompt,message_history_list)
                         if "需求" in response:
+                            print(response)
                             placeholder = st.empty()
                             full_response = 'Here is the decoration design followed your request.'
                             placeholder.markdown(full_response)
                             output = sd_module.use_sd_api(response[3:],upload_image)
-                            st.image(output,width=400)
+                            #st.image(output,width=400)
+                            render_img_html(image_to_base64(output))
                             response = output
                         else:
                             placeholder = st.empty()
@@ -144,9 +181,17 @@ def main():
                     with st.spinner("Thinking..."):
                         response = generate_llm_output(prompt,message_history_list)
                         if "需求" in response:
+                            # placeholder = st.empty()
+                            # full_response = 'Please upload your rough room image first and I will design it for you'
+                            # placeholder.markdown(full_response)
+                            # print(response)
                             placeholder = st.empty()
-                            full_response = 'Please upload your rough room image first and I will design it for you'
+                            full_response = 'Here is the decoration design followed your request.'
                             placeholder.markdown(full_response)
+                            output = sd_module.use_sd_api(response[3:],upload_image)
+                            #st.image(output,width=400)
+                            render_img_html(image_to_base64(output))
+                            response = output
                         else:
                             placeholder = st.empty()
                             full_response = ''
@@ -154,7 +199,7 @@ def main():
                                 full_response += item
                                 placeholder.markdown(full_response)
                             placeholder.markdown(full_response)
-                message = {"role": "assistant", "content": full_response}
+                message = {"role": "assistant", "content": response}
                 st.session_state.messages.append(message)
             
 

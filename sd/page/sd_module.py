@@ -236,7 +236,7 @@ def save_image(r):
 
 
 
-def use_sd_api(prompt,controlnet_img_path):
+def use_sd_api(prompt,controlnet_img_path=None):
     # 使用函数  转码图片
     if controlnet_img_path != "" and controlnet_img_path != None:
         base64_string = image_to_base64(controlnet_img_path)
