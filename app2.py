@@ -10,6 +10,7 @@ import unicodedata
 import base64
 import cv2
 
+# 显示图片
 def render_img_html(image_b64):
     st.markdown(f"<img style='max-width: 800px;max-height: 1000px;' src='data:image/png;base64, {image_b64}'/>", unsafe_allow_html=True)
 
@@ -19,6 +20,7 @@ def image_to_base64(image_path):
     base64_image = base64.b64encode(encoded_image.tobytes()).decode("utf-8")
     return base64_image
 
+# 判断是否有中文
 def contains_chinese(s):
     for c in s:
         if 'CJK UNIFIED' in unicodedata.name(c):
