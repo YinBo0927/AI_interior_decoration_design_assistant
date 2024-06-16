@@ -4,6 +4,12 @@ cookie:
   name: some_cookie_name
 credentials:
   usernames:
+    hy:
+      email: 202164690299@mail.scut.edu.cn
+      failed_login_attempts: 0
+      logged_in: false
+      name: hy
+      password: $2b$12$uudaqGt4.P7nMz/6Elv/.uSXTXGksjelPH5ThXGOcnii1LsNG9yiC
     yb:
       email: yb0927@outlook.com
       failed_login_attempts: 0

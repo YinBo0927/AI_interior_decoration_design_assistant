@@ -6,6 +6,13 @@ from http import HTTPStatus
 from dashscope import Generation
 from sd.page import sd_module
 from PIL import Image
+import unicodedata
+
+def contains_chinese(s):
+    for c in s:
+        if 'CJK UNIFIED' in unicodedata.name(c):
+            return True
+    return False
 
 def main():
     # App title
@@ -34,7 +41,10 @@ def main():
     # Display or clear chat messages
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
-            st.write(message["content"])
+            if os.path.isfile(message["content"]):
+                st.image(message["content"],width=400)
+            else:
+                st.write(message["content"])
 
     def clear_chat_history(message_history_list):
         st.session_state.messages.clear()
@@ -92,53 +102,60 @@ def main():
 
 
     if upload_image:
-        if prompt := st.chat_input(placeholder="Ask me anything!"):
+        if prompt := st.chat_input(placeholder="Ask me anything!(Only Support Engilsh Now)"):
             st.session_state.messages.append({"role": "user", "content": prompt})
             with st.chat_message("user"):
                 st.write(prompt)
         if st.session_state.messages[-1]["role"] != "assistant":
-            with st.chat_message("assistant"):
-                with st.spinner("Thinking..."):
-                    response = generate_llm_output(prompt,message_history_list)
-                    if "需求" in response:
-                        placeholder = st.empty()
-                        full_response = 'Here is the decoration design followed your request.'
-                        placeholder.markdown(full_response)
-                        output = sd_module.use_sd_api(response[3:],upload_image)
-                        st.image(output,width=400)
-                    else:
-                        placeholder = st.empty()
-                        full_response = ''
-                        for item in response:
-                            full_response += item
+            if contains_chinese(prompt):
+                st.error("Sorry, we only support English now.")
+            else:
+                with st.chat_message("assistant"):
+                    with st.spinner("Thinking..."):
+                        response = generate_llm_output(prompt,message_history_list)
+                        if "需求" in response:
+                            placeholder = st.empty()
+                            full_response = 'Here is the decoration design followed your request.'
                             placeholder.markdown(full_response)
-                        placeholder.markdown(full_response)
-            message = {"role": "assistant", "content": response} #这里不确定有没有问题
-            st.session_state.messages.append(message)
+                            output = sd_module.use_sd_api(response[3:],upload_image)
+                            st.image(output,width=400)
+                            response = output
+                        else:
+                            placeholder = st.empty()
+                            full_response = ''
+                            for item in response:
+                                full_response += item
+                                placeholder.markdown(full_response)
+                            placeholder.markdown(full_response)
+                message = {"role": "assistant", "content": response} #这里不确定有没有问题
+                st.session_state.messages.append(message)
                         
             
     else:
-        if prompt := st.chat_input(placeholder="Ask me anything!"):
+        if prompt := st.chat_input(placeholder="Ask me anything!(Only Support Engilsh Now)"):
             st.session_state.messages.append({"role": "user", "content": prompt})
             with st.chat_message("user"):
                 st.write(prompt)
         if st.session_state.messages[-1]["role"] != "assistant":
-            with st.chat_message("assistant"):
-                with st.spinner("Thinking..."):
-                    response = generate_llm_output(prompt,message_history_list)
-                    if "需求" in response:
-                        placeholder = st.empty()
-                        full_response = 'Please upload your rough room image first and I will design it for you'
-                        placeholder.markdown(full_response)
-                    else:
-                        placeholder = st.empty()
-                        full_response = ''
-                        for item in response:
-                            full_response += item
+            if contains_chinese(prompt):
+                    st.error("Sorry, we only support English now.")
+            else:
+                with st.chat_message("assistant"):
+                    with st.spinner("Thinking..."):
+                        response = generate_llm_output(prompt,message_history_list)
+                        if "需求" in response:
+                            placeholder = st.empty()
+                            full_response = 'Please upload your rough room image first and I will design it for you'
                             placeholder.markdown(full_response)
-                        placeholder.markdown(full_response)
-            message = {"role": "assistant", "content": full_response}
-            st.session_state.messages.append(message)
+                        else:
+                            placeholder = st.empty()
+                            full_response = ''
+                            for item in response:
+                                full_response += item
+                                placeholder.markdown(full_response)
+                            placeholder.markdown(full_response)
+                message = {"role": "assistant", "content": full_response}
+                st.session_state.messages.append(message)
             
 
 if __name__ == '__main__':
