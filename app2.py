@@ -105,7 +105,7 @@ def main():
                         full_response = 'Here is the decoration design followed your request.'
                         placeholder.markdown(full_response)
                         output = sd_module.use_sd_api(response[3:],upload_image)
-                        st.image(output)
+                        st.image(output,width=400)
                     else:
                         placeholder = st.empty()
                         full_response = ''
@@ -128,7 +128,7 @@ def main():
                     response = generate_llm_output(prompt,message_history_list)
                     if "需求" in response:
                         placeholder = st.empty()
-                        full_response = 'Please upload your rough room image first.'
+                        full_response = 'Please upload your rough room image first and I will design it for you'
                         placeholder.markdown(full_response)
                     else:
                         placeholder = st.empty()

@@ -82,6 +82,7 @@ from flask import Flask, request, jsonify
 import io
 import base64
 import datetime
+import os
   
 def image_to_base64(image_path):  
     with Image.open(image_path) as image_file:  
@@ -228,6 +229,7 @@ def save_image(r):
 
     for i in r['images']:
         image = Image.open(io.BytesIO(base64.b64decode(i.split(",", 1)[0])))
+        os.makedirs('output-img', exist_ok=True)
         image.save(f'output-img/{j}_{file_name}')
         j+=1
     return f'output-img/0_{file_name}'

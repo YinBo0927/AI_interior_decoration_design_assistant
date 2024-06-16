@@ -1,4 +1,5 @@
 import yaml
+import base64
 import streamlit as st
 from yaml.loader import SafeLoader
 import streamlit_authenticator as stauth
@@ -10,7 +11,26 @@ from streamlit_authenticator.utilities.exceptions import (CredentialsError,
                                                           UpdateError) 
 from app2 import main
 
+
+def main_bg(main_bg):
+    main_bg_ext = "png"
+    st.markdown(
+        f"""
+         <style>
+         .stApp {{
+             background: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()});
+             background-size: cover
+         }}
+         </style>
+         """,
+        unsafe_allow_html=True
+    )
+
+
 def login():
+    
+    # main_bg('bg.jpg')
+
     # Load config file
     with open('config.yaml', 'r', encoding='utf-8') as file:
         config = yaml.load(file, Loader=SafeLoader)
