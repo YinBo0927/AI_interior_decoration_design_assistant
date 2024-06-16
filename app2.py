@@ -11,7 +11,7 @@ import base64
 import cv2
 
 def render_img_html(image_b64):
-    st.markdown(f"<img style='max-width: 700px;max-height: 500px;' src='data:image/png;base64, {image_b64}'/>", unsafe_allow_html=True)
+    st.markdown(f"<img style='max-width: 800px;max-height: 1000px;' src='data:image/png;base64, {image_b64}'/>", unsafe_allow_html=True)
 
 def image_to_base64(image_path):
     image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
@@ -34,7 +34,28 @@ def main():
     # Replicate Credentials
     with st.sidebar:
         st.title('AIstinct')
-
+        st.markdown("""
+        <div style="text-align:left;">
+            <img src="https://s2.loli.net/2024/06/14/anpbUxW8vz1Vo42.png" class="sidebar-avatar" alt="Bot Avatar">
+        </div>
+        """, unsafe_allow_html=True)
+    
+        # 添加自定义样式
+        st.markdown("""
+            <style>
+                .bot-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 10px;
+                }
+                .sidebar-avatar {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+            </style>
+        """, unsafe_allow_html=True)
         st.divider()
         upload_image = st.file_uploader("Upload Image Here", accept_multiple_files=False, type = ['jpg', 'png'])
         if upload_image:
