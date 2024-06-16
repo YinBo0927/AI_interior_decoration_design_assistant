@@ -1,0 +1,6 @@
+streamlit
+PyYAML
+streamlit-authenticator
+replicate
+dashscope
+Pillow
