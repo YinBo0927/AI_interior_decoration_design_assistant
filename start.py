@@ -42,7 +42,7 @@ body {
 }
 .header{
     font-size: 36px;
-    margin-left: 290px;
+    margin-left: 285px;
 }
 .subheader1{
     font-size: 22px;
