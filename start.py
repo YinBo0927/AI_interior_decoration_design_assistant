@@ -100,3 +100,5 @@ if st.session_state.page == 'Start':
     start_page()
 elif st.session_state.page == 'Login':
     login()
+else:
+    login()
