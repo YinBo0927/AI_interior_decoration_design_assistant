@@ -13,7 +13,7 @@ from img2video import img2video
 
 # 显示图片
 def render_img_html(image_b64):
-    st.markdown(f"<img style='max-width: 800px;max-height: 1000px;' src='data:image/png;base64, {image_b64}'/>", unsafe_allow_html=True)
+    st.markdown(f"<img style='width: 500px;height: 500px;' src='data:image/png;base64, {image_b64}'/>", unsafe_allow_html=True)
 
 def image_to_base64(image_path):
     image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
@@ -159,14 +159,14 @@ def main():
                         with st.spinner("Thinking..."):
                             response = generate_llm_output(prompt,message_history_list)
                             if "需求" in response:
-                                print(response)
+                                #print(response)
                                 placeholder = st.empty()
                                 full_response = 'Here is the decoration design followed your request.'
                                 placeholder.markdown(full_response)
                                 output = sd_module.use_sd_api(response[3:],upload_image)
                                 #st.image(output,width=400)
                                 render_img_html(image_to_base64(output))
-                                st.video(img2video(output),format='video/mp4')
+                                #st.video(img2video(output),format='video/mp4')
                                 response = output
                             else:
                                 placeholder = st.empty()
@@ -201,10 +201,10 @@ def main():
                                 placeholder.markdown(full_response)
                                 output = sd_module.use_sd_api(response[3:],upload_image)
                                 #st.image(output,width=400)
-                                #render_img_html(image_to_base64(output))
+                                render_img_html(image_to_base64(output))
                                 # 展示视频
-                                st.video(img2video(output),format='video/mp4',autoplay=True)
-                                response = img2video(output)
+                                #st.video(img2video(output),format='video/mp4',autoplay=True)
+                                response = output
                             else:
                                 placeholder = st.empty()
                                 full_response = ''
@@ -214,7 +214,7 @@ def main():
                                 placeholder.markdown(full_response)
                     message = {"role": "assistant", "content": response}
                     st.session_state.messages.append(message)
-    else:
+    elif model == "AIstinct_video":
         if upload_image:
             if prompt := st.chat_input(placeholder="Ask me anything!(Only Support Engilsh Now)"):
                 st.session_state.messages.append({"role": "user", "content": prompt})
@@ -235,7 +235,8 @@ def main():
                                 output = sd_module.use_sd_api(response[3:],upload_image)
                                 #st.image(output,width=400)
                                 #render_img_html(image_to_base64(output))
-                                st.video(img2video(output),format='video/mp4')
+                                output= img2video(output)
+                                st.video(output,format='video/mp4')
                                 response = output
                             else:
                                 placeholder = st.empty()
@@ -270,10 +271,11 @@ def main():
                                 placeholder.markdown(full_response)
                                 output = sd_module.use_sd_api(response[3:],upload_image)
                                 #st.image(output,width=400)
-                                render_img_html(image_to_base64(output))
+                                #render_img_html(image_to_base64(output))
                                 # 展示视频
-                                st.video(img2video(output),format='video/mp4',autoplay=True)
-                                response = img2video(output)
+                                output = img2video(output)
+                                st.video(output,format='video/mp4',autoplay=True)
+                                response = output
                             else:
                                 placeholder = st.empty()
                                 full_response = ''
