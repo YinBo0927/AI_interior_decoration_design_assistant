@@ -145,7 +145,7 @@ def main():
         return assistant_reply
 
 
-    if model == "img_decoration":
+    if model == "AIstinct_img":
         if upload_image:
             if prompt := st.chat_input(placeholder="Ask me anything!(Only Support Engilsh Now)"):
                 st.session_state.messages.append({"role": "user", "content": prompt})
