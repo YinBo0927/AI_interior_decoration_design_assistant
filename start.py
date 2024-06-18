@@ -3,7 +3,7 @@ import base64
 from login import login
 
 # 设置页面配置
-st.set_page_config(page_title="应用程序", page_icon=":rocket:", layout="centered")
+st.set_page_config(page_title="AIstinct", page_icon=":rocket:", layout="centered")
 
 # 定义函数以设置背景图片
 def main_bg(main_bg):
