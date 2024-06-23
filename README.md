@@ -42,7 +42,7 @@ This is the course project from School of Future Technology in SCUT
 - [AIstinct](#aistinct)
   - [Catalogue](#catalogue)
   - [Getting Started Guide](#getting-started-guide)
-          - [Reference Configuration](#reference-configuration)
+    - [Reference Configuration](#reference-configuration)
       - [Deployment and Startup](#deployment-and-startup)
           - [1.Front-end applications](#1front-end-applications)
           - [2.back-end applications](#2back-end-applications)
