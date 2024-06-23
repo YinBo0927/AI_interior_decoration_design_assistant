@@ -23,63 +23,63 @@ This is the course project from School of Future Technology in SCUT
   <p align="center">
     <h3 align="center">Design spaces. Get creative.</h3>
     <strong><h3 align="center">Elevate your living.</h3><strong>
-    <p align="center">Easy to explore. Friendly to use. Just ask and AIstinct can <br>
+    <p align="center">Easy to explore. Friendly to use. Just ask and AIstinct can <br />
     assist with interior design, Q&A, brainstroming, and more.
     </p>
     <p align="center">
-    <a href="http://8.138.90.231:8503/">查看Demo</a>
-    ·
-    <a href="https://github.com/YinBo0927/AI_interior_decoration_design_assistant/issues">报告Bug</a>
-    ·
-    <a href="https://github.com/YinBo0927/AI_interior_decoration_design_assistant/issues">提出新特性</a>
+      <a href="http://8.138.90.231:8503/">View Demo</a>
+      ·
+      <a href="https://github.com/YinBo0927/AI_interior_decoration_design_assistant/issues">Report Bugs</a>
+      ·
+      <a href="https://github.com/YinBo0927/AI_interior_decoration_design_assistant/issues">Propose New Features</a>
     </p>
   </p>
 </p>
 
  
-## 目录
+## Catalogue
 
 - [AIstinct](#aistinct)
-  - [目录](#目录)
-  - [上手指南](#上手指南)
-          - [参考配置](#参考配置)
-      - [**部署与启动**](#部署与启动)
-          - [1.前端应用部署与启动](#1前端应用部署与启动)
-          - [2.后端应用部署](#2后端应用部署)
-  - [版权说明](#版权说明)
-  - [鸣谢](#鸣谢)
+  - [Catalogue](#catalogue)
+  - [Getting Started Guide](#getting-started-guide)
+          - [Reference Configuration](#reference-configuration)
+      - [Deployment and Startup](#deployment-and-startup)
+          - [1.Front-end applications](#1front-end-applications)
+          - [2.back-end applications](#2back-end-applications)
+  - [Copyright Notice](#copyright-notice)
+  - [Thanks](#thanks)
 
-## 上手指南
+## Getting Started Guide
 
 
-###### 参考配置
+###### Reference Configuration
 
-PyTorch: 2.1.0 
-Python: 3.10(ubuntu22.04) 
-Cuda: 12.1
-GPU: RTX 4090(24GB) * 1
-CPU: 12 vCPU Intel(R) Xeon(R) Platinum 8352V CPU @ 2.10GHz
-内存: 90GB
-硬盘: 50GB
+PyTorch: 2.1.0 <br />
+Python: 3.10(ubuntu22.04) <br />
+Cuda: 12.1<br />
+GPU: RTX 4090(24GB) * 1<br />
+CPU: 12 vCPU Intel(R) Xeon(R) Platinum 8352V CPU @ 2.10GHz<br />
+Memory: 90GB<br />
+Hard disk: 50GB<br />
 
-#### **部署与启动**
+#### Deployment and Startup
 
-###### 1.前端应用部署与启动
-第一步：安装前端项目依赖
+###### 1.Front-end applications
+Step 1: Install front-end project dependencies
 
 ```sh
 git pip install -r requirements.txt
 ```
-第二步：启动前端项目进程
+Step 2: Start the front-end project process
 
 
 ```sh
 streamlit run start.py
 ```
 
-###### 2.后端应用部署
+###### 2.back-end applications 
 
-第一步：部署3d-photo-inpainting[3d-photo-inpainting](https://github.com/vt-vl-lab/3d-photo-inpainting/tree/master?tab=readme-ov-file)项目
+Step 1: Deploy [3d-photo-inpainting](https://github.com/vt-vl-lab/3d-photo-inpainting/tree/master?tab=readme-ov-file)
 ```sh
 git clone https://github.com/vt-vl-lab/3d-photo-inpainting.git
 cd 3d-photo-inpainting
@@ -87,11 +87,11 @@ sh download.sh
 pip install -r requirements.txt
 cd ..
 ```
-替换与添加项目文件
+Replacing and Adding Project Files
 ```sh
 cp -r ./3d/* ./3d-photo-inpainting
 ```
-第二步：部署[stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui.git)项目
+Step 2: Deploy [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui.git)
 ```sh
 git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 cd stable-diffusion-webui
@@ -99,7 +99,7 @@ pip install -r requirements_versions.txt
 pip install -r requirements.txt
 cd ..
 ```
-下载lora模型与基础模型
+Download the Lora model and basic model
 ```sh
 cd stable-diffusion-webui/models/Lora
 wget https://huggingface.co/CreeperCatcher/AIstinct/resolve/main/FT_lora.safetensors?download=true
@@ -108,7 +108,7 @@ wget https://civitai.com/api/download/models/50722
 cd ../../..
 ```
 
-安装[controlnet](https://github.com/Mikubill/sd-webui-controlnet)拓展,并下载controlnet模型
+Install sd-extension [controlnet](https://github.com/Mikubill/sd-webui-controlnet) and download the controllnet model
 ```sh
 cd stable-diffusion-webui/extensions
 git clone https://github.com/Mikubill/sd-webui-controlnet.git
@@ -120,21 +120,21 @@ wget https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/reso
 wget https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11f1p_sd15_depth_fp16.safetensors?download=true
 cd ../../..
 ```
-第三步：启动后端项目进程
-启动3d-photo-inpainting 进程
+Step 3: Start the backend project process
+Start the 3D-photo-painting process
 ```sh
 python 3d-photo-inpainting/api.py
 ``` 
-无界面启动stable-diffusion-webui 进程
+Launching the stable-diffusion-webui process without an interface
 ```sh
 python stable-diffusion-webui/launch.py --port 6006 --nowebui
 ```
 
-## 版权说明
+## Copyright Notice
 
-该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/shaojintian/Best_README_template/blob/master/LICENSE.txt)
+This project has signed a MIT authorization license, please refer to  [LICENSE.txt](https://github.com/YinBo0927/AI_interior_decoration_design_assistant/LICENSE.txt) for details
 
-## 鸣谢
+## Thanks
 
 
 - [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui.git)
