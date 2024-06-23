@@ -22,7 +22,7 @@ This is the course project from School of Future Technology in SCUT
   <strong><h4 align="center">AIstinct</h4></strong>
   <p align="center">
     <h3 align="center">Design spaces. Get creative.</h3>
-    <strong><h3 align="center">Elevate your living.</h3><strong>
+    <strong><h3 align="center">Elevate your living.</h3></strong>
     <p align="center">Easy to explore. Friendly to use. Just ask and AIstinct can <br />
     assist with interior design, Q&A, brainstroming, and more.
     </p>
