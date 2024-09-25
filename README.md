@@ -68,7 +68,7 @@ Hard disk: 50GB<br />
 Step 1: Install front-end project dependencies
 
 ```sh
-git pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 Step 2: Start the front-end project process
 
